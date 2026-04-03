@@ -109,7 +109,6 @@ node* odd_even_LL(node* head){
     if(head==nullptr || head->next==nullptr){
         return head;
     }
-    // New Commit
     while (even!=nullptr && even->next!=nullptr)
     {
         odd->next=odd->next->next;
@@ -132,6 +131,7 @@ int main(){
     // node* head=odd_even_LL(head1);
     // linked_list_traversal(head);
 
+    int n=0;
 
     return 0;
 }
