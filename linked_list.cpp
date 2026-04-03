@@ -131,7 +131,5 @@ int main(){
     // node* head=odd_even_LL(head1);
     // linked_list_traversal(head);
 
-    int n=0;
-
     return 0;
 }
