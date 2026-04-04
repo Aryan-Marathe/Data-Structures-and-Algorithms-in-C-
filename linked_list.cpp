@@ -168,12 +168,45 @@ node* sort_LL_of_0_1_2(node* head){
 
 node* remove_nth_node_from_the_back(node* head,int n){
 
-    
+    node* fast=head;
+    for(int i=0;i<n;i++){
+        fast=fast->next;
+    }
+    node* slow=head;
+    if(fast==nullptr){
+        return head->next;
+    }
+    while (fast->next!=nullptr)
+    {
+        fast=fast->next;
+        slow=slow->next;
+    }
+    node* delnode=slow->next;
+    slow->next=slow->next->next;
+    delete delnode;
+    return head;   
+}
+
+node* reverse_LL(node* head){
+    stack<int> st;
+        node* temp=head;
+        while(temp!=nullptr){
+            st.push(temp->data);
+            temp=temp->next;
+        }
+        node* temp1=head;
+        while(!st.empty()){
+            int val=st.top();
+            st.pop();
+            temp1->data=val;
+            temp1=temp1->next;
+        }
+        return head;
 }
 int main(){
-    vector<int> arr={2 ,5, 6, 8, 9, 1};
+    vector<int> arr1={2 ,5, 6, 8, 9, 1};
     vector<int> arr2={0,0,1,2,1,0,2,1,0};
-    node* head1=convert_array_to_linked_list(arr);
+    node* head1=convert_array_to_linked_list(arr1);
     node* head2=convert_array_to_linked_list(arr2);
 
     // node* head=add_numbers_in_LL(head1,head2);
@@ -183,10 +216,14 @@ int main(){
     // linked_list_traversal(head);
 
     // node* head=sort_LL_of_0_1_2(head2);
+    // linked_list_traversal(head); 
+
+    // node* head=remove_nth_node_from_the_back(head1,3);
     // linked_list_traversal(head);
 
-    node* head=remove_nth_node_from_the_back(head,3);
-    linked_list_traversal(head);
+    // node* head=reverse_LL(head1);
+    // linked_list_traversal(head);
 
+    
     return 0;
 }
