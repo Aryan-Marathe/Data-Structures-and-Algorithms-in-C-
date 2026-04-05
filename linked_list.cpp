@@ -203,8 +203,41 @@ node* reverse_LL(node* head){
         }
         return head;
 }
+
+node* find_middle_LL(node* head){
+    node* slow=head;
+    node* fast=head;
+    while (fast->next!=nullptr && fast->next->next!=nullptr)
+    {
+        slow=slow->next;
+        fast=fast->next->next;
+    }
+    return slow;
+}
+bool is_palidrome(node* head){
+    stack<int> st;
+    node* temp=head;
+    while (temp!=nullptr)
+    {
+        st.push(temp->data);
+        temp=temp->next;
+    }
+    node* temp1=head;
+    while (!st.empty())
+    {
+        int val=st.top();
+        if(val!=temp1->data){
+            return false;
+        }
+        st.pop();
+        temp1=temp1->next;
+    }
+    return true;
+}
+
+
 int main(){
-    vector<int> arr1={2 ,5, 6, 8, 9, 1};
+    vector<int> arr1={2 ,5, 6, 3, 5, 9};
     vector<int> arr2={0,0,1,2,1,0,2,1,0};
     node* head1=convert_array_to_linked_list(arr1);
     node* head2=convert_array_to_linked_list(arr2);
@@ -223,6 +256,11 @@ int main(){
 
     // node* head=reverse_LL(head1);
     // linked_list_traversal(head);
+
+    // node* head=find_middle_LL(head1);
+    // linked_list_traversal(head);
+
+    // cout<<is_palidrome(head1);
 
     
     return 0;
