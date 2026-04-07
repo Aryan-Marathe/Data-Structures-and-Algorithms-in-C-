@@ -235,9 +235,50 @@ bool is_palidrome(node* head){
     return true;
 }
 
+int add_helper_func( node* head){
+    node* temp=head;
+    if(temp==nullptr){
+        return 1;
+    }
+    int carry=add_helper_func(temp->next);
+    temp->data=temp->data+carry;
+    if(temp->data<10){
+        return 0;
+    }
+    else{
+        temp->data=0;
+        return 1; 
+    }
+}
+node* add_1_to_LL(node* head){
+    int carry=add_helper_func(head);
+    if(carry==1){
+        node* newnode=new node(1);
+        newnode->next=head;
+        return newnode;
+    }
+    return head;
+}
 
+bool detect_loop(node* head){
+    if(head==nullptr || head->next==nullptr){
+        return false;
+    }
+    node* slow=head;
+    node* fast=head;
+
+    while (fast!=nullptr && fast->next!=nullptr)
+    {
+        slow=slow->next;
+        fast=fast->next->next;
+        if(fast==slow){
+            return true;
+        }
+    }
+    return false;  
+}
 int main(){
-    vector<int> arr1={2 ,5, 6, 3, 5, 9};
+    vector<int> arr1={9,9,9};
     vector<int> arr2={0,0,1,2,1,0,2,1,0};
     node* head1=convert_array_to_linked_list(arr1);
     node* head2=convert_array_to_linked_list(arr2);
@@ -262,6 +303,9 @@ int main(){
 
     // cout<<is_palidrome(head1);
 
+    // node* head=add_1_to_LL(head1);
+    // linked_list_traversal(head);
     
+    cout<<detect_loop(head1);
     return 0;
 }
