@@ -277,6 +277,77 @@ bool detect_loop(node* head){
     }
     return false;  
 }
+
+
+int find_loop_lenght(node* slow,node* fast){
+    int cnt=0;
+    while(slow!=nullptr){
+        if(slow==fast){
+            slow=slow->next;
+            cnt++;
+        }
+    }
+    return cnt;
+}
+int find_length_of_loop(node* head){
+
+    if(head==nullptr || head->next==nullptr){
+        return false;
+    }
+    node* slow=head;
+    node* fast=head;
+
+    while (fast!=nullptr && fast->next!=nullptr)
+    {
+        slow=slow->next;
+        fast=fast->next->next;
+        if(fast==slow){
+            return find_loop_lenght(slow,fast);
+        }
+    }
+    return 0;
+}
+
+node* delete_middle_node(node* head){
+    if(head==nullptr || head->next==nullptr){
+        return nullptr;
+    }
+    node* fast=head;
+    node* slow=head;
+    node* curr=nullptr;
+    while (fast!=nullptr && fast->next!=nullptr)
+    {
+        curr=slow;
+        slow=slow->next;
+        fast=fast->next->next;
+    }
+    curr->next=slow->next;
+    delete slow;
+    return head;   
+}
+
+node* find_starting_point_loop(node* head){
+    node*fast=head;
+    node* slow=head;
+
+    while (fast!=nullptr && fast->next!=nullptr)
+    {
+        slow=slow->next;
+        fast=fast->next->next;
+        if(slow==fast){
+            fast=head;
+        while (slow==fast)
+        {
+        fast=fast->next;
+        slow=slow->next;
+        }
+        return slow;
+    }
+
+    return nullptr;
+}
+
+
 int main(){
     vector<int> arr1={9,9,9};
     vector<int> arr2={0,0,1,2,1,0,2,1,0};
@@ -306,6 +377,15 @@ int main(){
     // node* head=add_1_to_LL(head1);
     // linked_list_traversal(head);
     
-    cout<<detect_loop(head1);
+    // cout<<detect_loop(head1);
+
+    // cout<<find_length_of_loop(head1);
+
+    // node* head=delete_middle_node(head1);
+    // linked_list_traversal(head);
+
+    // node* head=find_starting_point_loop(head2);
+    // linked_list_traversal(head);
+    
     return 0;
 }

@@ -20,9 +20,7 @@ int binary_serach_iterative(vector<int> &arr, int target){
             low=mid+1;
         }
     }
-
-    return -1;
-    
+    return -1;   
 }
 
 int binary_search_recurssive(vector<int> &arr, int low,int high,int target){
@@ -75,7 +73,6 @@ int find_lower_bound(vector<int> &arr,int target){
     // int lower_bound=__lower_bound(arr.begin(),arr.end(),target);  //the fucntion will return the iterator of lower bound
     // int idx=lower_bound-arr.begin(); //lower bound index
     // cout<<idx;
-
 }
 
 
@@ -106,8 +103,6 @@ int find_upper_bound(vector<int> &arr,int target){
     // int upper_bound=__upper_bound(arr.begin(),arr.end(),target);  //the fucntion will return the iterator of upper bound
     // int idx=upper_bound-arr.begin(); //upper bound index
     // cout<<idx;
-
-
 }
 
 int ceil_value(vector<int> &arr,int target){
