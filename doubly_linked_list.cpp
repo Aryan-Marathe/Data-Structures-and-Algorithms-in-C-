@@ -131,10 +131,27 @@ void find_pairs_with_given_sum(Dnode* head,int sum){
 
 Dnode* remove_duplicates_from_sortedDLL(Dnode* head){
 
-    
+    Dnode* temp=head;
+    while (temp!=nullptr && temp->next!=nullptr)
+    {
+        Dnode* nextnode=temp->next;
+        while (nextnode!=nullptr && nextnode->data==temp->data)
+        {
+            Dnode* duplicate=nextnode;
+            nextnode=nextnode->next;
+            delete duplicate;
+        }
+        
+        temp->next=nextnode;
+        if(nextnode->next!=nullptr){
+            nextnode->prev=temp;
+        }
+        temp=temp->next;
+    }
+    return head;
 }
 int main(){
-    vector<int> arr={1,2,3,4,9};
+    vector<int> arr={1,1,2,3,3,3,4,9};
     Dnode* head=create_DLL(arr);
 
     // head=reverse_DLL(head);
@@ -143,7 +160,10 @@ int main(){
     // head=delete_all_ocuurances_of_key(head,9);
     // DLL_traversal(head);
 
-    find_pairs_with_given_sum(head,5);
+    // find_pairs_with_given_sum(head,5);
+
+    head=remove_duplicates_from_sortedDLL(head);
+    DLL_traversal(head);
     
      return 0;
 }

@@ -346,10 +346,35 @@ node* find_starting_point_loop(node* head){
 
     return nullptr;
 }
+}
 
+node* roatate_linked_list_ktimes(node* head,int k){
+    int cnt=1;
+    node* tail=head;
+    while (tail->next!=nullptr)
+    {
+       cnt++;
+       tail=tail->next;
+    }
+       tail->next=head;
 
+       node* temp=head;
+       int length=(cnt-k)%cnt;
+       while (temp!=nullptr)
+       {
+        length--;
+        if(length==0){
+            temp->next=head;
+            temp->next=nullptr;
+        }
+        else{
+            temp=temp->next;
+        }
+       }
+    return head; 
+}
 int main(){
-    vector<int> arr1={9,9,9};
+    vector<int> arr1={1,2,3,4,5,6};
     vector<int> arr2={0,0,1,2,1,0,2,1,0};
     node* head1=convert_array_to_linked_list(arr1);
     node* head2=convert_array_to_linked_list(arr2);
@@ -386,6 +411,9 @@ int main(){
 
     // node* head=find_starting_point_loop(head2);
     // linked_list_traversal(head);
+
+    node* head=roatate_linked_list_ktimes(head1,2);
+    linked_list_traversal(head);
     
     return 0;
 }
