@@ -167,6 +167,99 @@ int find_diameter(node* root){
     check_depth(root);
     return diameter;
 }
+
+int maxPathDown(node* root, int &maximum){
+
+    if(root==nullptr){
+        return 0;
+    }
+    int lh=max(0,maxPathDown(root->left,maximum));
+    int rh=max(0,maxPathDown(root->right,maximum));
+    maximum=max(maximum,lh+rh+root->data);
+    return max(lh,rh)+root->data;
+}
+int maxPathSum(node* root){
+    int maximum=INT_MIN;
+    maxPathDown(root,maximum);
+    return maximum;
+}
+
+bool isLeaf(node* root){
+    if(root->left==nullptr && root->right==nullptr){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+void left_boundry_except_root(node* root,vector<int> &ans){
+    node* curr=root->left;
+    while (curr)
+    {
+        if(!isLeaf(curr)){
+            ans.push_back(curr->data);
+        }
+        if(curr->left){
+            curr=curr->left;
+        }
+        else{
+            curr=curr->right;
+        }
+    }
+    
+}
+void preorder(node* root,vector<int> &ans){
+    if(isLeaf(root)){
+        ans.push_back(root->data);
+        return;
+    }
+    if(root->left){
+        preorder(root->left,ans);
+    }
+    if(root->right){
+        preorder(root->right,ans);
+    }
+}
+void right_boundry_except_root(node* root,vector<int> &ans){
+    
+    node* curr=root->right;
+    vector<int> temp;
+    while (curr)
+    {
+        if(!isLeaf(curr)){
+            temp.push_back(curr->data);
+        }
+        if(curr->right){
+            curr=curr->right;
+        }
+        else
+        {
+            curr=curr->left;
+        }  
+    } 
+
+    for(int i=(int)temp.size()-1;i>=0;i--){
+            ans.push_back(temp[i]);
+        }
+}
+void boundary_traversal(node* root){
+
+    vector<int> ans;
+    if(isLeaf(root)){
+        ans.push_back(root->data);
+    }
+    left_boundry_except_root(root,ans);
+    preorder(root,ans);
+    right_boundry_except_root(root,ans);
+    
+    for(auto it : ans){
+        cout<<it<<" ";
+    }
+}
+
+
+
 int main(){
  
     vector<int> arr={1,4,7,3,8,2,9,0};
@@ -187,7 +280,11 @@ int main(){
 
     // cout<<check_balanced_tree(root);
 
-    cout<<find_diameter(root);
+    // cout<<find_diameter(root);
+
+    // cout<<maxPathSum(root);
+
+    // boundary_traversal(root);
 
     return 0;
 }
