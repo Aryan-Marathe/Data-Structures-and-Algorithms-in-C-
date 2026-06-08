@@ -50,9 +50,9 @@ bool possible(vector<int> &arr,int day,int m,int k){
             num_buquets+=(cnt/k);
             cnt=0;
         }
-        num_buquets+=(cnt/k);
-        return num_buquets>=m;
     }
+    num_buquets+=(cnt/k);
+    return num_buquets>=m;
 }
 int min_days_to_make_M_buquets(vector<int> &arr,int m,int k){
 
