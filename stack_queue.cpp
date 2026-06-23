@@ -368,13 +368,36 @@ int trapping_the_rain_water(vector<int> &arr){
     return total;
 }
 
-int sum_subarray_minimum(vector<int> &arr){
+void astaroid_collision(vector<int> &arr){
+    int n=arr.size();
+    vector<int> ans;
+    for(int i=0;i<n;i++){
+        if(arr[i]>0){
+            ans.push_back(arr[i]);
+        }
+        while (!ans.empty() && ans.back()>0 && ans.back()<abs(arr[i]))
+        {
+            ans.pop_back();
+        }
+        if(!ans.empty() && ans.back()==abs(arr[i])){
+            ans.pop_back();
+        }
+        else if(ans.empty() || ans.back()<0){
+            ans.push_back(arr[i]);
+        }   
+    }
 
-    //find all the sub arrays of the given array and get their minimun 
-    //return the sum of those minimum if sum is large the return the mod value with (1e9+7)
+    for(auto it:ans){
+        cout<<it<<" ";
+    }
 
-    
+}
 
+void remove_k_digits(string nums,int k){
+    // remove k digits from the string such that the remaining digits form the minimum number 
+
+    int n=nums.size();
+    stack<int> st;
 
 }
 int main(){
@@ -412,6 +435,10 @@ int main(){
     // previous_smaller_element(arr);
 
     // cout<<trapping_the_rain_water(arr);
+
+    // astaroid_collision(arr);
+
+    remove_k_digits("1432219",3);
 
 
 
