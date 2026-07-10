@@ -105,6 +105,56 @@ int count_number_of_set_bits(int num){
     }
     return cnt;
 }
+
+int minimun_number_bit_flips(int start, int goal){
+
+    /*
+    let start = 10 and end = 7
+    10 -> 1010 and 7 ->0111
+    1010
+   ^0111
+   ---------
+    1101
+
+    the number of set bits in the result are the number of bits that is required to flip 
+    */
+
+    int new_num=start ^ goal;
+    int flips = count_number_of_set_bits(new_num);
+    return flips;
+
+}
+
+void power_set(const vector<int>& nums) {
+    int n = nums.size();
+    int total = 1 << n;
+    vector<vector<int>> ans;
+    for (int mask = 0; mask < total; ++mask) {
+        vector<int> subset;
+        for (int j = 0; j < n; ++j) {
+            if (mask & (1 << j)) subset.push_back(nums[j]);
+        }
+        ans.push_back(subset);
+    }
+    for (const auto& s : ans) {
+        cout << "{";
+        for (size_t k = 0; k < s.size(); ++k) {
+            if (k) cout << ", ";
+            cout << s[k];
+        }
+        cout << "}\n";
+    }
+}
+
+int single_number(vector<int> nums){
+
+    int XOR=nums[0];
+    int n=nums.size();
+    for(int i=1;i<n;i++){
+        XOR=XOR^nums[i];
+    }
+    return XOR;
+}
 int main(){
 
     // cout<<convert_to_binary(9);
@@ -123,7 +173,15 @@ int main(){
 
     // cout<<remove_last_set_bit(84)<<'\n';
 
-    cout<<count_number_of_set_bits(9);
+    // cout<<count_number_of_set_bits(9);
+
+    // cout<<minimun_number_bit_flips(10,7);
+
+    // power_set({1,2,3});
+
+    cout<<single_number({4,1,2,1,2});
+
+
 
 
     return 0;
