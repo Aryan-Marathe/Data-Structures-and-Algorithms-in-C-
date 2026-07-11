@@ -155,6 +155,75 @@ int single_number(vector<int> nums){
     }
     return XOR;
 }
+
+int single_number_II(vector<int> nums){
+
+    /*
+    
+    let vector be { 5,5,5,6,4,4,4}
+    1]-> convert each number to binary
+columnNumber:210
+
+        5 -> 101
+        5 -> 101
+        5 -> 101
+        6 -> 110
+        4 -> 100
+        4 -> 100
+        4 -> 100
+
+    2]-> check for each column if its number of set bits are in multiople of 3
+
+        column 0 -> 3 set bits
+        column 1 -> 1 set bit
+        column 2 -> 7 set bits
+
+    3]-> if number of set bits are in multiple of 3 do not set them in answer 
+         else set the bit 
+         
+         ans = 110 { which is 6}
+    */
+
+    // int ans=0;
+    int n=nums.size();
+    // for(int bitIndex=0;bitIndex<32;bitIndex++){
+    //     int cnt=0;
+    //     for(int i=0;i<n;i++){
+    //         if(nums[i] & (1U<<bitIndex)){
+    //             cnt++;
+    //         }
+    //     }
+    //     if(cnt % 3 != 0){
+    //         ans = ans | (1U<<bitIndex);
+    //     }
+    // }
+    // return ans;
+
+
+    // APPROCH 2 -> 
+
+     /*
+     1] -> sort the array
+     2] -> start form the 1st element of the array
+     3] -> check for arr[i]==arr[i-1]
+     4] -> if true do i+=3
+           else return arr[i-1] is our ansewer
+     5] -> if array is traversed completely ans no match found then last elemnet is our answer 
+     */
+
+    //  int ans=0;
+    //  sort(nums.begin(),nums.end());
+    //  for(int i=0;i<n;i+=1){
+    //     if(nums[i]!=nums[i-1]){
+    //         return nums[i-1];
+    //     }
+    //  }
+    //  return nums[n-1];
+
+
+
+     
+}
 int main(){
 
     // cout<<convert_to_binary(9);
@@ -179,10 +248,9 @@ int main(){
 
     // power_set({1,2,3});
 
-    cout<<single_number({4,1,2,1,2});
+    // cout<<single_number({4,1,2,1,2});
 
-
-
+    cout<<single_number_II({5,5,5,6,4,4,4});
 
     return 0;
 }
