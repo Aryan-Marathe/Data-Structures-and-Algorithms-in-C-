@@ -219,10 +219,72 @@ columnNumber:210
     //     }
     //  }
     //  return nums[n-1];
-
-
-
      
+}
+
+int XOR_number_in_given_range(int n){
+    // int XOR=1;
+    // for(int i=2;i<=n;i++){
+    //     XOR=XOR^i;
+    // }
+    // return XOR;
+
+    /*
+
+    N=1  -> 1
+    N=2 -> 1^2 = 3
+    N=3 -> 1^2^3= 0
+    N=4 -> 1^2^3^4= 4
+
+    N=5 -> 1^2^3^4^5= 1
+    N=6 -> 1^2^3^4^5^6= 7
+    N=7 -> 1^2^3^4^5^6^7 = 0
+    N=8 -> 1^2^3^4^5^6^7^8 = 8
+
+    PATTERN ->
+
+         when N%4 == 1  then   ans = 1
+         when N%4 == 2  then   ans = N+1
+         when N%4 == 3  then   ans = 0
+         when N%4 == 4  then   ans= N
+
+
+    */
+
+    if(n%4==1){
+        return 1;
+    }
+    else if(n%4==2){
+        return n+1;
+    }
+    else if(n%4==3){
+        return 0;
+    }
+    else{
+        return n;
+    }
+}
+
+int XOR_of_number_range_LtoR(int l,int r){
+    
+    int left=XOR_number_in_given_range(l-1);
+    int right=XOR_number_in_given_range(r);
+    return left^right;
+}
+
+int divide_two_intergers(int dividend,int divisor){
+
+    // int sum=0;
+    // int cnt=0;
+    // while (sum+divisor<=dividend)
+    // {
+    //     cnt++;
+    //     sum+=divisor;
+    // }
+    // return cnt;
+    
+
+    
 }
 int main(){
 
@@ -250,7 +312,14 @@ int main(){
 
     // cout<<single_number({4,1,2,1,2});
 
-    cout<<single_number_II({5,5,5,6,4,4,4});
+    // cout<<single_number_II({5,5,5,6,4,4,4});
+
+    // cout<<XOR_number_in_given_range(7);
+
+    // cout<<XOR_of_number_range_LtoR(4,7);
+
+    cout<<divide_two_intergers(22,3);
+
 
     return 0;
 }
