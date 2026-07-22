@@ -60,15 +60,31 @@ int factorial_func(int n){
     return n*factorial_func(n-1);
 }
 
-int reverse_array(){
-    
+void reverse_array(vector<int> &arr,int i,int j){
+    if(i>=j){
+        return;
+    }
+    swap(arr[i],arr[j]);
+    reverse_array(arr,i+1,j-1);
+}
+
+bool check_palindrome(string str,int i,int j){
+    if(i>=j){
+        return true;
+    }
+    else if(str[i]!=str[j]){
+        return false;
+    }
+    else{
+        return check_palindrome(str,i+1,j-1);
+    }
 }
 
 int main(){
 
-    int n;
-    cout<<"enter the value of n : ";
-    cin>>n;
+    // int n;
+    // cout<<"enter the value of n : ";
+    // cin>>n;
     // print_name(1,n);
 
     // print_num(1,n);
@@ -80,6 +96,15 @@ int main(){
 
     // cout<<factorial_func(n);
 
+    // vector<int> arr={1,2,3,4,5};
+    // reverse_array(arr,0,4);
+    // for(int i=0;i<arr.size();i++){
+    //     cout<<arr[i]<<" ";
+    // }
+
+    string s1="aabbaa";
+    string s2="aabcaa";
+    cout<<check_palindrome(s2,0,5);
 
     return 0;
 }
