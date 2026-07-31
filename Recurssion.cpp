@@ -80,6 +80,34 @@ bool check_palindrome(string str,int i,int j){
     }
 }
 
+int fibonacci_num(int n){
+    if(n==0){
+        return 0;
+    }
+    if(n==1){
+        return 1;
+    }
+    return fibonacci_num(n-1)+fibonacci_num(n-2);
+}
+
+void print_subsequences(int idx,vector<int> &ds,vector<int> &arr,int n){
+
+    if(idx==n){
+        for(auto it : ds){
+            cout<<it<<" ";
+        }
+        cout<<endl;
+        return;
+    }
+
+    //take or pick the perticular index into the subsequence
+    ds.push_back(arr[idx]);
+    print_subsequences(idx+1,ds,arr,n);
+    ds.pop_back();
+
+    //not pick condition this element is not added to your subsequence
+    print_subsequences(idx+1,ds,arr,n);
+}
 int main(){
 
     // int n;
@@ -102,9 +130,18 @@ int main(){
     //     cout<<arr[i]<<" ";
     // }
 
-    string s1="aabbaa";
-    string s2="aabcaa";
-    cout<<check_palindrome(s2,0,5);
+    // string s1="aabbaa";
+    // string s2="aabcaa";
+    // cout<<check_palindrome(s2,0,5);
+
+    // cout<<fibonacci_num(7);
+
+    vector<int> arr={3,1,2};
+    int n=3;
+    vector<int> ds;
+    print_subsequences(0,ds,arr,n);
+
+    
 
     return 0;
 }
